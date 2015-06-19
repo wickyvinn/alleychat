@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  .title { font-size: 15px; text-align: center; padding: 4%;}
+  a { color: #FFCCB2; }
+  body { font: 13px Helvetica, Arial; }
+  form { background: #D6F7FF; padding: 14px; width: 100%; position: fixed; bottom: 0; }
+  form input { border: 0; padding: 10px; border-radius: 5px; border: solid; border-width: 1px; border-color: #99EBFF; width: 90%; margin-right: .5%; }
+  form button { width: 9%; background: #FFE6D8; border: solid; border-color: #FFCCB2; border-width: 1px; border-radius: 5px; padding: 10px; color: #FFCCB2;}
+  #messages { list-style-type: none; padding: 1% }
+  #messages li { padding: 2% }
+  #messages li:nth-child(odd) { background: #E8E8EA; }
+</style>
+
+</head>
+
+<body>
+
+  <div class="title"><a href="http://github.com/wickyvinn/alleychat">alleychat</a> is built in node.js and socket.io.</div>
+
+  <ul id="messages"></ul>
+  <form action="">
+    <input id="m" placeholder="Write a message..." autocomplete="off" /><button>Send</button>
+  </form>
+  
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+
+  var socket = io();
+
+  $('form').submit(function(){
+    socket.emit('chat message', $('#m').val());
+    $('#m').val('');
+    return false;
+  });
+
+  socket.on('chat message', function(msg){
+    $('#messages').append($('<li>').text(msg));
+  });
+
+</script>
+
+
+</script>
+
+</body>
+</html>
+
